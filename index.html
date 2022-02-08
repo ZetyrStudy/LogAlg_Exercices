@@ -18,7 +18,7 @@
         <input type="button" id="btnSub" value="–">&nbsp;
         <input type="button" id="btnMul" value="x">&nbsp;
         <input type="button" id="btnDiv" value="÷">
-    <br>
+        <br>
         <input type="number" id="result" placeholder="Resultado" readonly>
     </form>
 
@@ -26,65 +26,38 @@
         //Input1, Input2, Output
         var val1, val2, result;
 
-        console.log(el("btnSum"));
-
         //Reduce code
         function el(elId) {
             return document.getElementById(elId);
         }
 
-        //function that sum numbers
-        function sum() {
+        //function that calculate the numbers
+        function calc() {
             val1 = parseFloat(el("val1").value);
             val2 = parseFloat(el("val2").value);
+            console.log(val1, val2, this.value)
             if (notNumber(val1, val2)) {
                 return false;
             }
             else {
-                result = val1 + val2;
-                el("result").value = result
+                if (this.value === "+") {
+                    result = val1 + val2;
+                    el("result").value = result;
+                }
+                else if (this.value === "–") {
+                    result = val1 - val2;
+                    el("result").value = result;
+                }
+                else if (this.value === "x") {
+                    result = val1 * val2;
+                    el("result").value = result;
+                }
+                else {
+                    result = val1 / val2;
+                    el("result").value = result;
+                }
             }
         }
-
-        //function that subtract numbers
-        function sub() {
-            val1 = parseFloat(el("val1").value);
-            val2 = parseFloat(el("val2").value);
-            if (notNumber(val1, val2)) {
-                return false;
-            }
-            else {
-                result = val1 - val2;
-                el("result").value = result
-            }
-        }
-
-        //function that multiple numbers
-        function mul() {
-            val1 = parseFloat(el("val1").value);
-            val2 = parseFloat(el("val2").value);
-            if (notNumber(val1, val2)) {
-                return false;
-            }
-            else {
-                result = val1 * val2;
-                el("result").value = result
-            }
-        }
-
-        //function that divide numbers
-        function div() {
-            val1 = parseFloat(el("val1").value);
-            val2 = parseFloat(el("val2").value);
-            if (notNumber(val1, val2)) {
-                return false;
-            }
-            else {
-                result = val1 / val2;
-                el("result").value = result
-            }
-        }
-
 
         //Test if both variables are numbers
         function notNumber(v1, v2) {
@@ -98,10 +71,10 @@
         }
 
         //Give click properties to buttons
-        el("btnSum").onclick = sum;
-        el("btnSub").onclick = sub;
-        el("btnMul").onclick = mul;
-        el("btnDiv").onclick = div;
+        el("btnSum").onclick = calc;
+        el("btnSub").onclick = calc;
+        el("btnMul").onclick = calc;
+        el("btnDiv").onclick = calc;
 
         //Focus the input when clicked
         el("val1").onfocus = () => { el('val1').select(); }
