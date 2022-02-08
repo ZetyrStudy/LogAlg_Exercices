@@ -1,12 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <!--User input-->
+    <form id="input" style="text-align: center">
+        <h3>Calculadora</h3>
+        <input type="number" id="val1" placeholder="Valor 1"><br>
+        <input type="number" id="val2" placeholder="Valor 2"><br>
+        <input type="button" id="btnSum" value="+"><br>
+        <input type="number" id="result" placeholder="Resultado" readonly>
+    </form>
+
+    <script>
+        //Input1, Input2, Output
+        var val1, val2, result;
+
+        console.log(el("btnSum"));
+
+        //Reduce code
+        function el(elId) {
+            return document.getElementById(elId);
+        }
+
+        //Main function - sum numbers
+        function sum() {
+            val1 = parseFloat(el("val1").value);
+            val2 = parseFloat(el("val2").value);
+            if (notNumber(val1, val2)) {
+                return false;
+            }
+            else {
+                result = val1 + val2;
+                el("result").value = result
+            }
+        }
+
+        //Test if both variables are numbers
+        function notNumber(v1, v2) {
+            if (isNaN(v1) || isNaN(v2)) {
+                alert("Digite os valores para calcular.");
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        el("btnSum").onclick = sum;
+
+        //Focus the input when clicked
+        el("val1").onfocus = () => { el('val1').select(); }
+        el("val2").onfocus = () => { el('val2').select(); }
+
+
+    </script>
+
+
+
+
 </body>
+
 </html>
