@@ -14,7 +14,11 @@
         <h3>Calculadora</h3>
         <input type="number" id="val1" placeholder="Valor 1"><br>
         <input type="number" id="val2" placeholder="Valor 2"><br>
-        <input type="button" id="btnSum" value="+"><br>
+        <input type="button" id="btnSum" value="+">&nbsp;
+        <input type="button" id="btnSub" value="–">&nbsp;
+        <input type="button" id="btnMul" value="x">&nbsp;
+        <input type="button" id="btnDiv" value="÷">
+    <br>
         <input type="number" id="result" placeholder="Resultado" readonly>
     </form>
 
@@ -29,7 +33,7 @@
             return document.getElementById(elId);
         }
 
-        //Main function - sum numbers
+        //function that sum numbers
         function sum() {
             val1 = parseFloat(el("val1").value);
             val2 = parseFloat(el("val2").value);
@@ -42,6 +46,46 @@
             }
         }
 
+        //function that subtract numbers
+        function sub() {
+            val1 = parseFloat(el("val1").value);
+            val2 = parseFloat(el("val2").value);
+            if (notNumber(val1, val2)) {
+                return false;
+            }
+            else {
+                result = val1 - val2;
+                el("result").value = result
+            }
+        }
+
+        //function that multiple numbers
+        function mul() {
+            val1 = parseFloat(el("val1").value);
+            val2 = parseFloat(el("val2").value);
+            if (notNumber(val1, val2)) {
+                return false;
+            }
+            else {
+                result = val1 * val2;
+                el("result").value = result
+            }
+        }
+
+        //function that divide numbers
+        function div() {
+            val1 = parseFloat(el("val1").value);
+            val2 = parseFloat(el("val2").value);
+            if (notNumber(val1, val2)) {
+                return false;
+            }
+            else {
+                result = val1 / val2;
+                el("result").value = result
+            }
+        }
+
+
         //Test if both variables are numbers
         function notNumber(v1, v2) {
             if (isNaN(v1) || isNaN(v2)) {
@@ -53,7 +97,11 @@
             }
         }
 
+        //Give click properties to buttons
         el("btnSum").onclick = sum;
+        el("btnSub").onclick = sub;
+        el("btnMul").onclick = mul;
+        el("btnDiv").onclick = div;
 
         //Focus the input when clicked
         el("val1").onfocus = () => { el('val1').select(); }
