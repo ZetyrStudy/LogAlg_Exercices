@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: mydisplayfont;
+            src: url(./digital-7.ttf);
+        }
+
+        * {
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        html,
+        body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Consolas, 'Courier New', Courier, monospace;
+            font-size: 18px;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input {
+            font-family: inherit;
+            font-size: inherit;
+            width: 100%;
+            height: 2rem;
+            border: 2px solid white;
+            background: rgb(240, 240, 240);
+            border-radius: .2rem;
+        }
+
+        input[type="text"] {
+            font-family: mydisplayfont;
+            text-align: right;
+            width: 14rem;
+            font-size: 2rem;
+            height: 3rem;
+            padding: .5rem;
+            color: rgb(104, 104, 104);
+            border: 2px solid rgb(77, 77, 77);
+            background: white;
+        }
+
+        input[type="button"]:hover {
+            background: rgb(224, 224, 224);
+        }
+
+        input[type="button"]:active {
+            background: rgb(128, 128, 128);
+        }
+
+        table {
+            margin: 1rem;
+            background: linear-gradient(rgb(115, 179, 231), rgb(27, 63, 92));
+            padding: .5rem;
+            border: 1px solid grey;
+            border-radius: .2rem;
+            box-shadow: 5px 5px 4px 0px #545454;
+        }
+
+        th {
+            color: white;
+        }
+
+        td {
+            padding: .5rem .25rem;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <form id="calc">
+        <table>
+            <tr>
+                <th colspan="4">LogAlg Calculator 1.0</th>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="text" id="result" readonly></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="7" value="7"></td>
+                <td><input type="button" id="8" value="8"></td>
+                <td><input type="button" id="9" value="9"></td>
+                <td><input type="button" id="/" value="÷"></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="4" value="4"></td>
+                <td><input type="button" id="5" value="5"></td>
+                <td><input type="button" id="6" value="6"></td>
+                <td><input type="button" id="*" value="x"></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="1" value="1"></td>
+                <td><input type="button" id="2" value="2"></td>
+                <td><input type="button" id="3" value="3"></td>
+                <td><input type="button" id="-" value="–"></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="erase" value="←"></td>
+                <td><input type="button" id="0" value="0"></td>
+                <td><input type="button" id="." value="•"></td>
+                <td><input type="button" id="+" value="+"></td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="button" id="=" value="="></td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+
+        function el(elId) {
+            return document.getElementById(elId);
+        }
+
+        content = []
+        function calc() {
+            content.push(this.value)
+            el("result").innerHTML = content
+            console.log(content)
+
+        }
+
+        function calculator() {
+            [content].join(" + ")
+            el("result").innerHTML = content
+            console.log(content)
+            equal = eval(content)
+            console.log(equal)
+        }
+
+        function faker() {
+           c = arrayToString(content);
+           console.log(c)
+           equal = eval(c)
+           console.log(equal)
+
+        }
+
+        function arrayToString(arr) {
+                let str = '';
+                arr.forEach(function (i, index) {
+                    str += i;
+                    if (index != (arr.length - 1)) {
+                        str += ' + ';
+                    };
+                });
+                return str;
+            }
+
+        el("1").onclick = calc;
+        el("2").onclick = calc;
+        el("3").onclick = calc;
+        el("4").onclick = calc;
+        el("5").onclick = calc;
+        el("6").onclick = calc;
+        el("7").onclick = calc;
+        el("8").onclick = calc;
+        el("9").onclick = calc;
+        el("0").onclick = calc;
+        el("+").onclick = calc;
+        el("-").onclick = calc;
+        el("*").onclick = calc;
+        el("/").onclick = calc;
+        el(".").onclick = calc;
+        //el("erase").onclick = eraseLast;
+        el("=").onclick = faker;
+
+
+    </script>
+</body>
+
+</html>
