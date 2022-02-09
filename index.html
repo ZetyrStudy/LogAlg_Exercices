@@ -40,22 +40,23 @@
                 return false;
             }
             else {
-                if (this.value === "+") {
-                    result = val1 + val2;
-                    el("result").value = result;
+                switch (this.value) {
+                    case "+":
+                        opr = "+"
+                        break;
+                    case "–":
+                        opr = "-"
+                        break
+                    case "x":
+                        opr = "*"
+                        break
+                    case "÷":
+                        opr = "/"
+                        break
                 }
-                else if (this.value === "–") {
-                    result = val1 - val2;
-                    el("result").value = result;
-                }
-                else if (this.value === "x") {
-                    result = val1 * val2;
-                    el("result").value = result;
-                }
-                else {
-                    result = val1 / val2;
-                    el("result").value = result;
-                }
+                el("result").value = eval(val1 + opr + val2)
+
+
             }
         }
 
