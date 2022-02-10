@@ -87,12 +87,14 @@
 
 
     <form id="calc">
+
+        <p id="result"> </p>
         <table>
             <tr>
                 <th colspan="4">LogAlg Calculator 1.0</th>
             </tr>
             <tr>
-                <td colspan="4"><input type="text" id="result" readonly></td>
+                <td colspan="4"><input type="text" id="result"></td>
             </tr>
             <tr>
                 <td><input type="button" id="7" value="7"></td>
@@ -113,7 +115,7 @@
                 <td><input type="button" id="-" value="–"></td>
             </tr>
             <tr>
-                <td><input type="button" id="erase" value="←"></td>
+                <td><input type="button" id="er" value="←"></td>
                 <td><input type="button" id="0" value="0"></td>
                 <td><input type="button" id="." value="•"></td>
                 <td><input type="button" id="+" value="+"></td>
@@ -125,45 +127,32 @@
     </form>
 
     <script>
+        var res = [];
+
 
         function el(elId) {
+            console.log('e')
             return document.getElementById(elId);
         }
+        
 
-        content = []
+
         function calc() {
-            content.push(this.value)
-            el("result").innerHTML = content
-            console.log(content)
+            res.push(this.value)
+            el("result").innerHTML = res
+            console.log(res)
 
         }
 
-        function calculator() {
-            [content].join(" + ")
-            el("result").innerHTML = content
-            console.log(content)
-            equal = eval(content)
-            console.log(equal)
-        }
-
-        function faker() {
-           c = arrayToString(content);
-           console.log(c)
-           equal = eval(c)
-           console.log(equal)
+        function faker(i) {
+            console.log(res);
+            var x = res.join(' ');
+            console.log(x);
+            y = eval(x)
+            console.log(y)
+            el("result").value = x;
 
         }
-
-        function arrayToString(arr) {
-                let str = '';
-                arr.forEach(function (i, index) {
-                    str += i;
-                    if (index != (arr.length - 1)) {
-                        str += ' + ';
-                    };
-                });
-                return str;
-            }
 
         el("1").onclick = calc;
         el("2").onclick = calc;
@@ -176,13 +165,18 @@
         el("9").onclick = calc;
         el("0").onclick = calc;
         el("+").onclick = calc;
-        el("-").onclick = calc;
-        el("*").onclick = calc;
-        el("/").onclick = calc;
-        el(".").onclick = calc;
-        //el("erase").onclick = eraseLast;
+        el("-").onclick = calc("-");
+        el("*").onclick = calc("*");
+        el("/").onclick = calc("/");
+        el(".").onclick = calc(".");
+        el("er").onclick = eraseLast;
         el("=").onclick = faker;
 
+        function eraseLast() {
+            res = [];
+            console.log(res);
+            el("result").innerHTML = res;
+        }
 
     </script>
 </body>
