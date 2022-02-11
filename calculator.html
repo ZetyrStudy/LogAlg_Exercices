@@ -88,13 +88,16 @@
 
     <form id="calc">
 
-        <p id="result"> </p>
+        <p id="results"></p>
         <table>
             <tr>
                 <th colspan="4">LogAlg Calculator 1.0</th>
             </tr>
             <tr>
-                <td colspan="4"><input type="text" id="result"></td>
+                <td colspan="4"><input type="text" id="result2" readonly></td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="text" id="result" readonly></td>
             </tr>
             <tr>
                 <td><input type="button" id="7" value="7"></td>
@@ -127,55 +130,58 @@
     </form>
 
     <script>
-        var res = [];
-
+        var array = [];
 
         function el(elId) {
-            console.log('e')
             return document.getElementById(elId);
         }
-        
 
+        buttons = document.querySelectorAll('input[type="button"]');
+        for (i = 0; i < buttons.length; i++) {
+            buttons[i].onclick = calc;
+        }
 
         function calc() {
-            res.push(this.value)
-            el("result").innerHTML = res
-            console.log(res)
 
+            switch (this.value) {
+                case '=':
+                    finish();
+                    break;
+                case '←':
+                    eraseLast();
+                    break;
+                case "–":
+                    array.push("-");
+                    el("result").value = "-"
+                    break;
+                case "x":
+                    array.push("*");
+                    el("result").value = "";
+                    break;
+                case "÷":
+                    array.push("/");
+                    break;
+                case "•":
+                    array.push(".");
+                    break;
+                default:
+                    array.push(this.value);
+                    el("result").value = el("result").value + this.value;
+            }
+            console.log(array)
         }
 
-        function faker(i) {
-            console.log(res);
-            var x = res.join(' ');
-            console.log(x);
-            y = eval(x)
-            console.log(y)
-            el("result").value = x;
-
+        function finish() {
+            var str = array.join('');
+            sum = eval(str);
+            el("result").value = sum;
+            array = ["sum"];
+            el("result2").value = sum;
         }
-
-        el("1").onclick = calc;
-        el("2").onclick = calc;
-        el("3").onclick = calc;
-        el("4").onclick = calc;
-        el("5").onclick = calc;
-        el("6").onclick = calc;
-        el("7").onclick = calc;
-        el("8").onclick = calc;
-        el("9").onclick = calc;
-        el("0").onclick = calc;
-        el("+").onclick = calc;
-        el("-").onclick = calc("-");
-        el("*").onclick = calc("*");
-        el("/").onclick = calc("/");
-        el(".").onclick = calc(".");
-        el("er").onclick = eraseLast;
-        el("=").onclick = faker;
 
         function eraseLast() {
-            res = [];
-            console.log(res);
-            el("result").innerHTML = res;
+            array = [];
+            el("result").value = array;
         }
 
     </script>
